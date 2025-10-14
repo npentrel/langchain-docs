@@ -1,0 +1,51 @@
+name: Check Links
+
+on:
+  pull_request:
+
+concurrency:
+  group: create-preview-${{ github.ref_name }}
+  cancel-in-progress: true
+
+# Least-privileged defaults. We'll elevate at the job level only where needed.
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  check-links:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout current branch
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event_name == 'pull_request' && github.head_ref || github.ref_name }}
+          fetch-depth: 0
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3
+        with:
+          version: "latest"
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v6
+
+      - name: Install dependencies
+        run: make install
+
+      - name: Check for broken links
+        run: |
+          output=$(make broken-links 2>&1)
+          echo "$output"
+          if echo "$output" | grep -q "found [1-9][0-9]* broken links"; then
+            echo "❌ Broken links detected! Add redirects or change broken links."
+            exit 1
+          else
+            echo "✅ No broken links found"
+          fi
