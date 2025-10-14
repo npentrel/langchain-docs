@@ -1434,6 +1434,18 @@
   {
     "source": "/langgraph-platform/:path*",
     "destination": "/langsmith/:path*"
+  },
+  {
+    "source": "/langgraph-platform/langgraph-studio",
+    "destination": "/langsmith/studio"
+  },
+  {
+    "source": "/oss/python/integrations/providers/toolbox-langchain",
+    "destination": "/oss/python/integrations/providers/toolbox"
+  },
+  {
+    "source": "/oss/javascript/integrations/providers/toolbox-langchain",
+    "destination": "/oss/javascript/integrations/providers/toolbox"
   }
 ]
 }
