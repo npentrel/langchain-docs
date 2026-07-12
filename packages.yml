@@ -877,3 +877,6 @@ packages:
   repo: skynetcmd/m3-memory
   path: .
   js: "n/a"
+- name: langchain-replylayer
+  repo: replylayer/rly
+  js: "n/a"
