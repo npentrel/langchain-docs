@@ -879,4 +879,5 @@ packages:
   js: "n/a"
 - name: langchain-replylayer
   repo: replylayer/rly
+  path: langchain-python
   js: "n/a"
