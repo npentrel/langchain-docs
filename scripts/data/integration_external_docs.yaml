@@ -401,6 +401,9 @@ python:
   - name: Instanode
     pypi: langchain-instanode
     docs_url: https://instanode.dev/docs
+  - name: ILoveVideoEditorTool
+    pypi: langchain-ilovevideoeditor
+    docs_url: https://ilovevideoeditor.com/docs/api-guide
   - name: ProxyClaw
     pypi: langchain-proxyclaw
     docs_url: https://docs.proxyclaw.ai
