@@ -437,6 +437,9 @@ python:
   - name: PerseusVaultToolkit
     pypi: langchain-perseus-vault
     docs_url: https://github.com/Perseus-Computing-LLC/langchain-perseus-vault
+  - name: ReplyLayerToolkit
+    pypi: langchain-replylayer
+    docs_url: https://replylayer.ai/docs/guides/langchain
   - name: RustChainToolkit
     pypi: langchain-rustchain-tools
     docs_url: https://github.com/Scottcjn/langchain-rustchain
@@ -642,6 +645,11 @@ python:
     docs_url: https://github.com/Perseus-Computing-LLC/langchain-perseus-vault
     self_host: true
     cloud_offering: false
+  - name: ReplyLayerRetriever
+    pypi: langchain-replylayer
+    docs_url: https://replylayer.ai/docs/guides/langchain
+    self_host: false
+    cloud_offering: true
   - name: M3Retriever
     pypi: m3-memory
     docs_url: https://github.com/skynetcmd/m3-memory/blob/main/docs/integrations/LANGCHAIN.md
@@ -887,6 +895,9 @@ python:
   - name: ProxyHatLoader
     pypi: langchain-proxyhat
     docs_url: https://docs.proxyhat.com
+  - name: ReplyLayerLoader
+    pypi: langchain-replylayer
+    docs_url: https://replylayer.ai/docs/guides/langchain
   - name: PdfmuseLoader
     pypi: langchain-pdfmuse
     docs_url: https://github.com/casperkwok/pdfmuse
