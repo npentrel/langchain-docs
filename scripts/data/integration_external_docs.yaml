@@ -820,6 +820,9 @@ python:
   - name: OnBaseToolkit
     pypi: langchain-opendma
     docs_url: https://github.com/OpenDMA/langchain-opendma/blob/main/docs/Toolkit.md#onbasetoolkit
+  - name: GateCoreToolkit
+    pypi: gatecore-langchain
+    docs_url: https://gatecoreai.com/docs/
   middleware:
   - name: CopilotKit
     pypi: copilotkit
