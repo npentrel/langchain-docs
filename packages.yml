@@ -1235,3 +1235,7 @@ packages:
   name_title: OpenDMA
   repo: OpenDMA/langchain-opendma
   js: "n/a"
+- name: gatecore-langchain
+  name_title: GateCore
+  repo: GateCoreAI-com/GateCoreAI
+  js: "n/a"
