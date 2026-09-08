@@ -7,13 +7,11 @@ description: Declare managed cron schedules for Managed Deep Agents deployments.
 import ManagedDeepAgentsPublicBetaNote from '/snippets/langsmith/managed-deep-agents-public-beta-note.mdx';
 import ManagedDeepAgentsTestAndDeploy from '/snippets/langsmith/managed-deep-agents-test-and-deploy.mdx';
 
-Managed Deep Agents can run agents on a cron schedule. When you deploy the project, `mda deploy` provisions each schedule as a LangSmith cron after the deployment is live.
+A schedule runs a managed deep agent on a cron. When you deploy the project, `mda deploy` provisions each schedule as a LangSmith cron after the deployment is live.
 
 <ManagedDeepAgentsPublicBetaNote />
 
-## Project structure
-
-Schedule declarations live in the project-level `schedules/` directory, with one schedule per file:
+Put schedule declarations under `schedules/` at the project root, with one schedule per file:
 
 :::python
 ```text
@@ -33,7 +31,11 @@ my-agent/
 ```
 :::
 
+For the full project layout, see [Project structure](/langsmith/managed-deep-agents-project-structure).
+
 ## Add a schedule
+
+Use a schedule when the agent should run on a cron without an inbound user message.
 
 The file name becomes the managed schedule name.
 
@@ -44,6 +46,9 @@ The schedule module must define a named `schedule` declaration.
 :::js
 The schedule module must export a named `schedule` declaration.
 :::
+
+<Steps>
+  <Step title="Declare the schedule" id="declare-the-schedule">
 
 :::python
 ```python schedules/daily_digest.py
@@ -68,6 +73,9 @@ export const schedule = defineSchedule({
 });
 ```
 :::
+
+  </Step>
+</Steps>
 
 ## Configure schedule input
 
@@ -218,11 +226,11 @@ Schedule declarations are extracted at compile time. Keep schedule configuration
 
 - Put dynamic behavior in the agent, tools, middleware, or runtime context instead.
 
-## Deploy schedules
+## Deployment
 
 <ManagedDeepAgentsTestAndDeploy />
 
-When the deployment reaches `DEPLOYED`, `mda deploy` searches for existing Managed Deep Agents-owned cron jobs on the deployed Agent Server, deletes them, and creates cron jobs for the current `schedules/` declarations. Removing a local schedule file and redeploying removes the corresponding managed cron.
+`mda deploy` discovers schedule modules under `schedules/` and provisions each one as a LangSmith cron after the deployment reaches `DEPLOYED`. It searches for existing Managed Deep Agents-owned cron jobs on the deployed Agent Server, deletes them, and creates cron jobs for the current declarations. Removing a local schedule file and redeploying removes the corresponding managed cron.
 
 <Warning>
 If you deploy with `--no-wait`, the CLI triggers the remote build and exits before the deployment reaches `DEPLOYED`, so it does not reconcile schedules during that invocation. Run `mda deploy` without `--no-wait` when adding, changing, or removing schedules.
@@ -242,6 +250,13 @@ If you deploy with `--no-wait`, the CLI triggers the remote build and exits befo
 - `cron must be a standard 5-field expression`: Use five cron fields, not seconds-based cron syntax.
 - `schedule is not static`: Replace computed values with literals or top-level literal constants.
 - `failed to create cron for schedule`: Open the deployment URL in LangSmith and confirm the deployed Agent Server is healthy.
+
+## When to use schedules
+
+| Goal | Use |
+| --- | --- |
+| Run the agent on a cron without an inbound message | Schedules |
+| Start runs from messaging services | [Channels](/langsmith/managed-deep-agents-channels) |
 
 ## Next steps
 

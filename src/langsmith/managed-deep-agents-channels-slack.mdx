@@ -12,7 +12,7 @@ Managed Deep Agents creates and configures the resources that connect Slack to t
 
 <ManagedDeepAgentsPublicBetaNote />
 
-## Project structure
+Put the Slack channel declaration under `channels/`:
 
 :::python
 ```text
@@ -32,9 +32,11 @@ my-agent/
 ```
 :::
 
+For the full project layout, see [Project structure](/langsmith/managed-deep-agents-project-structure).
+
 ## Add a Slack channel
 
-A managed deep agent deployment supports one Slack channel.
+Use a Slack channel when people should invoke the agent from Slack. A managed deep agent deployment supports one Slack channel.
 
 :::python
 The channel declaration lives at `channels/slack.py`.
@@ -43,6 +45,9 @@ The channel declaration lives at `channels/slack.py`.
 :::js
 The channel declaration lives at `channels/slack.ts`.
 :::
+
+<Steps>
+  <Step title="Declare the channel" id="declare-the-channel">
 
 To include Slack when you create a project, pass `--channel slack`:
 
@@ -107,6 +112,9 @@ import { channels } from "managed-deepagents";
 export const channel = channels.slack();
 ```
 :::
+
+  </Step>
+</Steps>
 
 ## Configure your agent's appearance in Slack
 
@@ -202,7 +210,7 @@ export const channel = channels.slack({
 </ParamField>
 :::
 
-## Deploy the agent
+## Deployment
 
 During deployment, Managed Deep Agents provisions your agent in Slack from the channel declaration.
 
@@ -252,8 +260,13 @@ If Slack is already authorized, deployment completes without an authorization pr
 
 After you change the agent's name, description, icon, or background color in the Slack channel declaration, redeploy the agent to apply the changes in Slack.
 
-## See also
+## When to use a Slack channel
 
-- [Channels overview](/langsmith/managed-deep-agents-channels): understand how channels connect messaging services to an agent.
-- [Deploy an agent](/langsmith/managed-deep-agents-deploy): configure and deploy a managed deep agent.
-- [CLI reference](/langsmith/managed-deep-agents-cli): review Managed Deep Agents commands and flags.
+| Goal | Use |
+| --- | --- |
+| Start runs from Slack mentions, direct messages, and thread replies | Slack channel |
+| Understand channels in general | [Channels overview](/langsmith/managed-deep-agents-channels) |
+| Authenticate callers and scope channel runs | [Identity](/langsmith/managed-deep-agents-identity) |
+| Deliver scheduled results to Slack | [Schedules](/langsmith/managed-deep-agents-schedules) |
+
+For more information, see [Project structure](/langsmith/managed-deep-agents-project-structure).

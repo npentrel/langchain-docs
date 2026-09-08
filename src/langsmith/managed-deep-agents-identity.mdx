@@ -40,8 +40,6 @@ By default, `mda init` requires callers to present a LangSmith API key. Anyone w
 | Lock down the deployment for SDK clients, scripts, and services | [LangSmith API key (default)](#configure-identity-with-a-langsmith-api-key) |
 | Signed-in end users with private chats | [Supabase](#configure-identity-with-supabase) |
 
-For more information, see [Project structure](/langsmith/managed-deep-agents-project-structure).
-
 ## Configure identity with a LangSmith API key
 
 `mda init` scaffolds this identity provider as a secure default. Callers must present a valid LangSmith workspace API key. Managed Deep Agents verifies the key with LangSmith Cloud.
@@ -155,8 +153,18 @@ Adding Supabase identity to an existing deployment does not add owner metadata t
   </Step>
 </Steps>
 
-## Test and deploy
+## Deployment
 
-<ManagedDeepAgentsTestAndDeploy />
+`mda deploy` includes the identity declaration in the managed configuration.
 
 Authentication failures return 401. For the LangSmith API-key default, confirm that clients send `x-api-key`. For Supabase, confirm that clients send `Authorization: Bearer <access_token>`, that `project_ref` / `projectRef` matches your Supabase project, and that callers cannot access another user's threads (403).
+
+## When to use identity
+
+| Goal | Use |
+| --- | --- |
+| Control who can invoke the deployment | Identity |
+| Start runs from messaging services | [Channels](/langsmith/managed-deep-agents-channels) |
+| Deliver scheduled results through a channel | [Schedules](/langsmith/managed-deep-agents-schedules) |
+
+For more information, see [Project structure](/langsmith/managed-deep-agents-project-structure).

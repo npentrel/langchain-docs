@@ -10,9 +10,7 @@ A channel makes a managed deep agent available in an external messaging service.
 
 <ManagedDeepAgentsPublicBetaNote />
 
-## Project structure
-
-Channel declarations live in the project-level `channels/` directory:
+Put channel declarations under `channels/` at the project root:
 
 :::python
 ```text
@@ -31,6 +29,8 @@ my-agent/
     slack.ts
 ```
 :::
+
+For the full project layout, see [Project structure](/langsmith/managed-deep-agents-project-structure).
 
 ## Understand channels
 
@@ -62,7 +62,9 @@ flowchart LR
 
 Provider adapters determine which events are accepted, how provider conversations map to Managed Deep Agents threads, and how responses are delivered. The channel declaration exposes the supported configuration for that provider.
 
-## Declare channels in a project
+## Add a channel
+
+Use a channel when people should start agent runs from an external messaging service.
 
 Put each channel in a separate module under `channels/`.
 
@@ -98,10 +100,6 @@ For example, `channels.slack()` creates a Slack channel.
 
 See the provider guide for its declaration, app configuration, and deployment procedure.
 
-## Distinguish channels from connectors
-
-A channel receives messages that start agent runs and delivers responses. An [MCP connector](/langsmith/managed-deep-agents-mcp-connectors) gives the agent tools from a remote MCP server. A project can use either or both.
-
 ## Supported channels
 
 <CardGroup cols={2}>
@@ -110,9 +108,17 @@ A channel receives messages that start agent runs and delivers responses. An [MC
   </Card>
 </CardGroup>
 
-## See also
+## Deployment
 
-- [Identity](/langsmith/managed-deep-agents-identity): authenticate callers and scope channel runs to the resolved user.
-- [Schedules](/langsmith/managed-deep-agents-schedules): deliver scheduled results through a configured channel.
-- [Deploy an agent](/langsmith/managed-deep-agents-deploy): deploy project changes and configure secrets.
-- [CLI reference](/langsmith/managed-deep-agents-cli): review channel project-file conventions.
+`mda deploy` discovers channel modules under `channels/` and provisions provider resources from each declaration. See the provider guide for authorization and post-deploy steps.
+
+## When to use channels
+
+| Goal | Use |
+| --- | --- |
+| Make the agent available in a messaging service | Channels |
+| Load tools from a remote MCP server | [MCP connectors](/langsmith/managed-deep-agents-mcp-connectors) |
+| Authenticate callers and scope channel runs | [Identity](/langsmith/managed-deep-agents-identity) |
+| Deliver scheduled results through a channel | [Schedules](/langsmith/managed-deep-agents-schedules) |
+
+For more information, see [Project structure](/langsmith/managed-deep-agents-project-structure).
