@@ -6,7 +6,7 @@ description: Opt in to deployment-shared durable memory for a managed deep agent
 
 import ManagedDeepAgentsPublicBetaNote from '/snippets/langsmith/managed-deep-agents-public-beta-note.mdx';
 
-Normally, a managed deep agent's conversational memory is scoped to a thread or session. Durable memory is optional knowledge that an agent can retain across threads and sessions. Managed Deep Agents do not have durable memory by default.
+Normally, a managed deep agent's conversational memory is scoped to a thread or session. Durable memory is optional knowledge that an agent can retain across threads and sessions. Managed Deep Agents (MDA) do not have durable memory by default.
 
 When enabled, durable memory is backed by the [Context Hub](/langsmith/use-the-context-hub). The deployment gets one read/write tree at `/memories/agent/`, shared by every caller.
 
